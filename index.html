@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feliz Cumpleaños, mi amor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rosa-fondo:#fdd3dc;
+  --rosa-claro:#ffe9ee;
+  --rosa:#f0457a;
+  --rosa-fuerte:#e11d62;
+  --vino:#6b1030;
+  --texto:#2b1a20;
+  --vidrio:rgba(255,255,255,.55);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Poppins',system-ui,sans-serif;
+  color:var(--texto);
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 15% 10%,#fff3f6 0,transparent 35%),
+    radial-gradient(circle at 85% 30%,#ffc2d1 0,transparent 40%),
+    radial-gradient(circle at 20% 80%,#ffc9d6 0,transparent 40%),
+    linear-gradient(180deg,#ffdfe6,#fcc3d1 60%,#f9b3c6);
+  background-attachment:fixed;
+  overflow-x:hidden;
+}
+/* corazones flotando */
+#cielo{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.flota{position:absolute;bottom:-40px;color:#ff7fa5;opacity:.55;animation:sube linear forwards}
+@keyframes sube{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+
+main{
+  position:relative;z-index:1;
+  max-width:880px;margin:0 auto;
+  padding:max(28px,env(safe-area-inset-top)) 18px max(32px,env(safe-area-inset-bottom));
+  text-align:center;
+}
+
+/* Botón de música */
+.musica{
+  position:absolute;top:14px;right:14px;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  background:none;border:0;cursor:pointer;font-family:inherit;
+  color:#c2355f;font-size:.7rem;max-width:110px;line-height:1.2;
+}
+.musica .corazon{
+  width:64px;height:64px;border-radius:50%;
+  display:grid;place-items:center;font-size:1.9rem;color:#fff;
+  background:radial-gradient(circle at 30% 25%,#ff7aa8,#e11d62);
+  box-shadow:0 0 0 6px rgba(255,255,255,.35),0 8px 22px rgba(225,29,98,.45);
+  transition:transform .2s;
+}
+.musica:hover .corazon{transform:scale(1.07)}
+.musica.sonando .corazon{animation:latido 1.1s infinite}
+@keyframes latido{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+.musica:focus-visible,.boton:focus-visible,.cerrar:focus-visible{outline:3px solid var(--vino);outline-offset:4px}
+
+/* Encabezado */
+.para{
+  margin-top:14px;font-size:.78rem;letter-spacing:.28em;color:#c2355f;
+  text-transform:uppercase;font-weight:500;
+}
+h1{
+  font-family:'Great Vibes',cursive;font-weight:400;
+  font-size:clamp(2.8rem,10vw,5.2rem);line-height:1.02;margin-top:10px;
+  color:var(--rosa);
+  text-shadow:0 2px 0 rgba(255,255,255,.7),0 6px 18px rgba(225,29,98,.25);
+}
+h1 .nombre{display:block;color:var(--vino);font-size:1.12em}
+.lema{margin-top:12px;font-size:1rem;color:#7a3550}
+
+/* Fotos */
+.fotos{
+  display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px;
+}
+.foto{
+  position:relative;aspect-ratio:1/1;border-radius:26px;overflow:hidden;
+  background:linear-gradient(135deg,#ffb3c8,#ff86a9);
+  box-shadow:0 0 0 4px rgba(255,255,255,.55),0 14px 34px rgba(190,40,90,.28);
+}
+.foto img{width:100%;height:100%;object-fit:cover;display:block}
+.foto .vacia{
+  position:absolute;inset:0;display:none;place-items:center;padding:14px;
+  color:#fff;font-size:.85rem;font-weight:500;
+}
+.foto.sin-imagen img{display:none}
+.foto.sin-imagen .vacia{display:grid}
+.foto .mini{
+  position:absolute;font-size:1.9rem;color:#ff5f93;
+  filter:drop-shadow(0 3px 5px rgba(0,0,0,.25));
+}
+.foto:nth-child(1) .mini{top:10px;left:12px}
+.foto:nth-child(2) .mini{bottom:8px;right:12px}
+
+/* Carta */
+.carta{
+  position:relative;margin-top:30px;text-align:left;
+  display:grid;grid-template-columns:minmax(150px,.85fr) 1.4fr;gap:18px;align-items:center;
+  padding:22px;border-radius:28px;
+  background:linear-gradient(135deg,rgba(255,255,255,.75),rgba(255,235,241,.6));
+  border:1px solid rgba(255,255,255,.8);
+  box-shadow:0 14px 34px rgba(220,70,120,.18);
+}
+.sobre{width:100%;max-width:230px;margin:0 auto;filter:drop-shadow(0 12px 14px rgba(200,60,100,.3))}
+.carta h2{font-family:'Dancing Script',cursive;font-size:2rem;color:var(--rosa-fuerte);font-weight:700;line-height:1.1}
+.carta p{margin-top:12px;font-size:.93rem;line-height:1.65}
+.carta .firma{font-family:'Dancing Script',cursive;font-size:1.7rem;color:var(--rosa-fuerte);font-weight:700;margin-top:14px;line-height:1.2}
+
+/* Botón sorpresa */
+.sorpresa{margin-top:30px}
+.boton{
+  font-family:'Great Vibes',cursive;font-size:2.4rem;color:#fff;cursor:pointer;
+  padding:6px 54px 12px;border:0;border-radius:999px;
+  background:linear-gradient(180deg,#ff5f93,#e11d62);
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.4),0 0 0 4px rgba(255,255,255,.4),0 12px 26px rgba(225,29,98,.45);
+  transition:transform .15s,box-shadow .15s;
+}
+.boton:hover{transform:translateY(-2px) scale(1.03)}
+.boton:active{transform:scale(.97)}
+.sorpresa small{display:block;margin-top:12px;font-size:.82rem;color:#8a3a58}
+
+/* Frase final */
+.final{
+  margin-top:34px;font-family:'Dancing Script',cursive;font-size:clamp(1.4rem,5vw,1.9rem);
+  color:var(--vino);line-height:1.4;
+}
+.final em{display:block;color:var(--rosa-fuerte);font-style:normal;font-weight:700}
+
+/* Ventana sorpresa */
+.velo{
+  position:fixed;inset:0;z-index:20;display:none;place-items:center;padding:20px;
+  background:rgba(107,16,48,.55);backdrop-filter:blur(4px);
+}
+.velo.abierto{display:grid}
+.ventana{
+  position:relative;max-width:420px;width:100%;padding:34px 26px 28px;text-align:center;
+  background:linear-gradient(160deg,#fff,#ffe3ea);border-radius:30px;
+  box-shadow:0 24px 60px rgba(0,0,0,.35);animation:entra .45s cubic-bezier(.2,1.3,.4,1);
+}
+@keyframes entra{from{transform:scale(.6);opacity:0}}
+.ventana .pastel{font-size:3.4rem}
+.ventana h3{font-family:'Great Vibes',cursive;font-weight:400;font-size:2.6rem;color:var(--rosa-fuerte);margin:6px 0}
+.ventana p{font-size:.98rem;line-height:1.6;color:#4a2030}
+.cerrar{
+  margin-top:20px;border:0;cursor:pointer;font-family:inherit;font-size:.9rem;color:#fff;
+  padding:10px 26px;border-radius:999px;background:var(--rosa-fuerte);
+}
+
+/* Confeti */
+.confeti{position:fixed;top:-30px;z-index:30;pointer-events:none;animation:cae linear forwards}
+@keyframes cae{to{transform:translateY(110vh) rotate(540deg)}}
+
+@media (max-width:640px){
+  .carta{grid-template-columns:1fr;text-align:center}
+  .carta h2,.carta .firma{text-align:center}
+  .musica{position:static;margin:0 0 0 auto}
+  .fotos{gap:10px}
+  .foto{border-radius:20px}
+}
+@media (prefers-reduced-motion:reduce){
+  .flota,.musica.sonando .corazon,.ventana{animation:none}
+}
+</style>
+</head>
+<body>
+
+<div id="cielo" aria-hidden="true"></div>
+
+<main>
+  <button class="musica" id="btnMusica" type="button" aria-label="Reproducir nuestra canción">
+    <span class="corazon">♪</span>
+    <span>Toca para escuchar nuestra canción</span>
+  </button>
+
+  <p class="para">♥ Para ti, mi amor ♥</p>
+  <h1>Feliz Cumpleaños,<span class="nombre" id="nombre">Mi Amor</span></h1>
+  <p class="lema" id="lema">Cada día contigo es mi lugar favorito. ✨</p>
+
+  <section class="fotos" aria-label="Nuestras fotos">
+    <figure class="foto">
+      <img src="foto1.jpg" alt="Nosotros dos" onerror="this.parentElement.classList.add('sin-imagen')">
+      <span class="vacia">Agrega tu foto como<br>foto1.jpg</span>
+      <span class="mini">♥</span>
+    </figure>
+    <figure class="foto">
+      <img src="foto2.jpg" alt="Nuestras manos juntas" onerror="this.parentElement.classList.add('sin-imagen')">
+      <span class="vacia">Agrega tu foto como<br>foto2.jpg</span>
+      <span class="mini">♥</span>
+    </figure>
+  </section>
+
+  <section class="carta">
+    <svg class="sobre" viewBox="0 0 240 200" role="img" aria-label="Sobre con una carta">
+      <defs>
+        <linearGradient id="gS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb3c8"/><stop offset="1" stop-color="#f77fa2"/></linearGradient>
+        <linearGradient id="gT" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffc9d8"/><stop offset="1" stop-color="#f58aab"/></linearGradient>
+      </defs>
+      <rect x="55" y="22" width="130" height="110" rx="10" fill="#ffe6ee" stroke="#fff" stroke-width="3"/>
+      <path d="M120 100 C 90 76,92 58,106 56 C 114 55,119 60,120 64 C 121 60,126 55,134 56 C 148 58,150 76,120 100Z" fill="none" stroke="#fff" stroke-width="3.5" stroke-linejoin="round"/>
+      <path d="M20 70 L120 12 L220 70 Z" fill="url(#gT)"/>
+      <rect x="20" y="70" width="200" height="118" rx="10" fill="url(#gS)"/>
+      <path d="M20 78 L120 140 L220 78" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="3"/>
+      <path d="M20 186 L100 118 M220 186 L140 118" stroke="#fff" stroke-opacity=".45" stroke-width="3" fill="none"/>
+    </svg>
+    <div>
+      <h2>Para ti, mi amor 💗</h2>
+      <p id="saludo">¡Feliz cumpleaños, mi amor! 🎂</p>
+      <p id="mensaje1">Gracias por existir y por llenar mi vida de colores. Cada sonrisa, cada abrazo y cada momento contigo hacen que me enamore más de ti.</p>
+      <p id="mensaje2">Deseo que este nuevo año de vida te traiga todo lo que sueñas, y que yo pueda estar a tu lado para verlo cumplirse.</p>
+      <p class="firma">Te amo muchísimo. ❤️</p>
+    </div>
+  </section>
+
+  <section class="sorpresa">
+    <button class="boton" id="btnSorpresa" type="button">Te Amo ♡</button>
+    <small>🎁 Presiona el botón para una sorpresa</small>
+  </section>
+
+  <p class="final">Y si volviera a empezar, volvería a elegirte a ti<em>una y mil veces. ❤️</em></p>
+</main>
+
+<div class="velo" id="velo" role="dialog" aria-modal="true" aria-labelledby="tSorpresa">
+  <div class="ventana">
+    <div class="pastel">🎂</div>
+    <h3 id="tSorpresa">¡Feliz cumpleaños!</h3>
+    <p id="textoSorpresa">Pide un deseo, apaga las velitas y recuerda que mi regalo favorito eres tú. Hoy y siempre, te elijo. 💖</p>
+    <button class="cerrar" id="btnCerrar" type="button">Cerrar</button>
+  </div>
+</div>
+
+<audio id="audio" src="cancion.mp3" loop preload="none"></audio>
+
+<script>
+/* ============ PERSONALIZA AQUÍ ============ */
+const CONFIG = {
+  nombre: "Mi Amor",   // Ej: "Valentina"
+  lema: "Cada día contigo es mi lugar favorito. ✨",
+  textoSorpresa: "Pide un deseo, apaga las velitas y recuerda que mi regalo favorito eres tú. Hoy y siempre, te elijo. 💖"
+};
+/* ========================================== */
+
+document.getElementById('nombre').textContent = CONFIG.nombre;
+document.getElementById('lema').textContent = CONFIG.lema;
+document.getElementById('textoSorpresa').textContent = CONFIG.textoSorpresa;
+
+/* Corazones que flotan */
+const cielo = document.getElementById('cielo');
+const reducir = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function corazon(){
+  const c = document.createElement('span');
+  c.className = 'flota';
+  c.textContent = Math.random() > .25 ? '♥' : '♡';
+  c.style.left = Math.random()*100 + 'vw';
+  c.style.fontSize = (12 + Math.random()*26) + 'px';
+  const dur = 9 + Math.random()*9;
+  c.style.animationDuration = dur + 's';
+  cielo.appendChild(c);
+  setTimeout(() => c.remove(), dur*1000);
+}
+if(!reducir){
+  for(let i=0;i<10;i++) setTimeout(corazon, i*400);
+  setInterval(corazon, 900);
+}
+
+/* Música */
+const audio = document.getElementById('audio');
+const btnMusica = document.getElementById('btnMusica');
+btnMusica.addEventListener('click', () => {
+  if(audio.paused){
+    audio.play().then(() => {
+      btnMusica.classList.add('sonando');
+      btnMusica.setAttribute('aria-label','Pausar nuestra canción');
+    }).catch(() => alert('Agrega tu canción al repositorio con el nombre cancion.mp3'));
+  } else {
+    audio.pause();
+    btnMusica.classList.remove('sonando');
+    btnMusica.setAttribute('aria-label','Reproducir nuestra canción');
+  }
+});
+
+/* Sorpresa con confeti */
+const velo = document.getElementById('velo');
+function confeti(){
+  const piezas = ['❤️','💖','💗','🎉','🎂','🎁','✨','🌸'];
+  for(let i=0;i<70;i++){
+    const p = document.createElement('span');
+    p.className = 'confeti';
+    p.textContent = piezas[Math.floor(Math.random()*piezas.length)];
+    p.style.left = Math.random()*100 + 'vw';
+    p.style.fontSize = (16 + Math.random()*20) + 'px';
+    const dur = 2.5 + Math.random()*2.5;
+    p.style.animationDuration = dur + 's';
+    p.style.animationDelay = Math.random()*.8 + 's';
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), (dur+1)*1000);
+  }
+}
+document.getElementById('btnSorpresa').addEventListener('click', () => {
+  velo.classList.add('abierto');
+  if(!reducir) confeti();
+  document.getElementById('btnCerrar').focus();
+});
+function cerrar(){ velo.classList.remove('abierto'); }
+document.getElementById('btnCerrar').addEventListener('click', cerrar);
+velo.addEventListener('click', e => { if(e.target === velo) cerrar(); });
+document.addEventListener('keydown', e => { if(e.key === 'Escape') cerrar(); });
+</script>
+</body>
+</html>
